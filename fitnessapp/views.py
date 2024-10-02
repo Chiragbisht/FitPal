@@ -6,6 +6,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.backends import ModelBackend
 
+
+
+
+
+
 def login_or_register(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -61,3 +66,10 @@ def update_user(request):
                 messages.success(request, 'Your username has been updated successfully.')
                 return redirect('home')
     return render(request, 'fitnessapp/update_user.html')
+
+
+
+
+
+
+

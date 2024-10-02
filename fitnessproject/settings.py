@@ -64,6 +64,8 @@ SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
+
+
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
@@ -72,15 +74,25 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        
         'SCOPE': [
             'profile',
             'email',
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',
-        }
+        },
+        'OAUTH2_PARAMS': {
+            'prompt': 'consent',  # This can be adjusted; try 'select_account' if users have multiple accounts.
+        },
+        'LOGIN_HINT': '',  # Can be used to suggest a particular email (leave blank for normal behavior).
     }
 }
+
+
+SOCIALACCOUNT_AUTO_SIGNUP = True
+ACCOUNT_SIGNUP_REDIRECT_URL = '/dashboard'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
