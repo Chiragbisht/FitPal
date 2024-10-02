@@ -27,7 +27,12 @@ SECRET_KEY = 'django-insecure-e0cz#zko1^m=4u@$71a1wsk89m_q*g)$_ay*(vzw8@z8@=%(&1
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+<<<<<<< HEAD
 CSRF_TRUSTED_ORIGINS = ['https://fittpal-iajq0cas.b4a.run']
+=======
+CSRF_TRUSTED_ORIGINS = ['https://fittpal-iajq0cas.b4a.run',
+                       'https://*.b4a.run']
+>>>>>>> bf4d5ef50ecf71363868faa60b603e36f9d1d084
 
 AUTH_USER_MODEL = 'auth.User'
 
@@ -35,6 +40,9 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Application definition
 
