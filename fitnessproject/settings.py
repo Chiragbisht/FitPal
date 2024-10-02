@@ -27,6 +27,9 @@ SECRET_KEY = 'django-insecure-e0cz#zko1^m=4u@$71a1wsk89m_q*g)$_ay*(vzw8@z8@=%(&1
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://fittpal-iajq0cas.b4a.run']
+
+
 AUTH_USER_MODEL = 'auth.User'
 
 AUTHENTICATION_BACKENDS = [
@@ -52,6 +55,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'unique_user_email',
+
+    'corsheaders',
 
 
 ]
@@ -110,6 +115,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'fitnessproject.urls'
