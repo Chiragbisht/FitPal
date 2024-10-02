@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #ffffffec;
+            color: #ffffff;
+        }
+        .card {
+            background-color: #232325;
+            border-color: #27272a;
+        }
+        .btn-primary {
+            background-color: #3f3f46;
+            border-color: #3f3f46;
+        }
+        .btn-primary:hover {
+            background-color: #52525b;
+            border-color: #52525b;
+        }
+        .btn-secondary {
+            background-color: #27272a;
+            border-color: #27272a;
+        }
+        .btn-secondary:hover {
+            background-color: #3f3f46;
+            border-color: #3f3f46;
+        }
+        input, select, textarea {
+            background-color: #27272a;
+            border-color: #3f3f46;
+            color: #ffffff;
+        }
+        .btn, input, select, textarea {
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <div class="flex-grow">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
