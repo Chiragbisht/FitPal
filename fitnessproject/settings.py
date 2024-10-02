@@ -28,8 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://fittpal-iajq0cas.b4a.run']
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> f2813fafaafbeadfe6637eeb5275950ad72aabc1
 AUTH_USER_MODEL = 'auth.User'
 
 AUTHENTICATION_BACKENDS = [
