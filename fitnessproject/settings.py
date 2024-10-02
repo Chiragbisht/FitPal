@@ -28,11 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://fittpal-iajq0cas.b4a.run']
-<<<<<<< HEAD
 
-
-=======
->>>>>>> f2813fafaafbeadfe6637eeb5275950ad72aabc1
 AUTH_USER_MODEL = 'auth.User'
 
 AUTHENTICATION_BACKENDS = [
@@ -79,6 +75,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_UNIQUE_EMAIL = True
+
+
+
+
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
