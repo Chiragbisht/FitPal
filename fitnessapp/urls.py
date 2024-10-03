@@ -12,6 +12,10 @@ urlpatterns = [
     
 
     path('dashboard/', views.dashboard, name='dashboard'),
+
+   
+
+    path('diet/', views.diet_tracker, name='diet_tracker'),
     
 
    

@@ -38,9 +38,9 @@
             </div>
             <div class="card bg-white shadow-lg rounded-lg overflow-hidden">
                 <div class="card-body p-6">
-                    <h5 class="card-title text-xl font-semibold mb-2">Diet</h5>
-                    <p class="card-text mb-4">Monitor your daily calorie intake.</p>
-                    <a href="#" class="btn btn-primary block text-center rounded-lg py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold transition duration-300 ease-in-out">Log Meals</a>
+                    <h5 class="card-title text-xl font-semibold mb-2">Diet (check this) </h5>
+                    <p class="card-text mb-4">Get personalied diet plan</p>
+                    <a href="{% url 'diet_tracker' %}" class="btn btn-primary block text-center rounded-lg py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold transition duration-300 ease-in-out">Get Diet</a>
                 </div>
             </div>
             <div class="card bg-white shadow-lg rounded-lg overflow-hidden">
@@ -51,8 +51,13 @@
                 </div>
             </div>
         </div>
+
+        
     {% else %}
-        <p class="lead text-center mb-8">Track your fitness journey, set goals, and achieve results!</p>
+    
+       
     {% endif %}
-</div>
+    </div>
+    
+
 {% endblock %}
