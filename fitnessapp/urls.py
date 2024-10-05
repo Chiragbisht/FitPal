@@ -18,5 +18,17 @@ urlpatterns = [
     path('diet/', views.diet_tracker, name='diet_tracker'),
     
 
+
+ 
+
+
+    path('aboutus/', views.aboutus, name='aboutus'),
+    path('contact/', views.contact, name='contact'),
+    path('pricing/', views.pricing, name='pricing'),
+    path('privacy/', views.privacy, name='privacy'),
+    path('termsandconditions/', views.termsandconditions, name='termsandconditions'),
+    path('cancelandrefund/', views.cancelandrefund, name='cancelandrefund'),
+
+
    
 ]

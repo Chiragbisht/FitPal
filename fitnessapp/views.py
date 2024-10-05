@@ -186,3 +186,24 @@ def diet_tracker(request):
     
     return render(request, 'fitnessapp/diet.html', context)
 
+
+
+
+
+def aboutus(request):
+    return render(request, 'fitnessapp/aboutus.html')
+
+def contact(request):
+    return render(request, 'fitnessapp/contact.html')
+
+def pricing(request):
+    return render(request, 'fitnessapp/pricing.html')
+
+def privacy(request):
+    return render(request, 'fitnessapp/privacy.html')
+
+def termsandconditions(request):
+    return render(request, 'fitnessapp/termsandconditions.html')
+
+def cancelandrefund(request):
+    return render(request, 'fitnessapp/cancelandrefund.html')
