@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,8 +27,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e0cz#zko1^m=4u@$71a1wsk89m_q*g)$_ay*(vzw8@z8@=%(&1'
 
 
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY','AIzaSyBPqVhcPyW26L6MgPrgYc6IXXVxjr_n4XY')
+load_dotenv()
 
+
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+
+
+
+RAZORPAY_KEY_ID = os.environ.get('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET')
 
 
 

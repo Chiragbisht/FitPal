@@ -11,8 +11,17 @@ import requests
 from django.conf import settings
 import google.generativeai as genai
 
+import razorpay
 
 
+
+client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+def get_diet(request):
+    if request.method == 'POST':
+        # Process form data
+        amount = 10  # Amount in paise (e.g., 100 paise = 1 INR)
+        order = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
+        return render(request, 'payment.html', {'order': order})
 
 def login_or_register(request):
     if request.method == 'POST':
@@ -158,33 +167,73 @@ def generate_diet_plan(diet_type, maintenance_calories, age, gender, weight, hei
 
 
 
+
+
+@login_required
 def diet_tracker(request):
-    context = {'show_results': False}
     if request.method == 'POST':
-        # Extract form data
-        age = int(request.POST.get('age', 0))
-        gender = request.POST.get('gender', '')
-        weight = float(request.POST.get('weight', 0))
-        height = float(request.POST.get('height', 0))
-        exercise_level = request.POST.get('exercise_level', '')
-        goal = request.POST.get('goal', '')
-        diet_type = request.POST.get('diet_type', '')
-        
-        # Perform calculations
-        bmi = calculate_bmi(weight, height)
-        maintenance_calories = calculate_maintenance_calories(age, gender, weight, height, exercise_level, goal)
-        
-        # Generate the diet plan
-        diet_plan = generate_diet_plan(diet_type, maintenance_calories, age, gender, weight, height, bmi, exercise_level)
-        
-        context.update({
-            'bmi': bmi,
-            'maintenance_calories': maintenance_calories,
-            'diet_plan': diet_plan,
-            'show_results': True,
-        })
-    
-    return render(request, 'fitnessapp/diet.html', context)
+        # Store form data in session
+        request.session['diet_form_data'] = request.POST.dict()
+        # Redirect to payment
+        return redirect('get_diet')
+    return render(request, 'fitnessapp/diet.html')
+
+@login_required
+def get_diet(request):
+    if request.method == 'POST':
+        # Handle Razorpay payment verification
+        payment_id = request.POST.get('razorpay_payment_id', '')
+        order_id = request.POST.get('razorpay_order_id', '')
+        signature = request.POST.get('razorpay_signature', '')
+        params_dict = {
+            'razorpay_payment_id': payment_id,
+            'razorpay_order_id': order_id,
+            'razorpay_signature': signature
+        }
+        try:
+            client.utility.verify_payment_signature(params_dict)
+            # Payment successful, generate diet plan
+            form_data = request.session.get('diet_form_data', {})
+            diet_plan = generate_diet_plan(
+                form_data.get('diet_type'),
+                calculate_maintenance_calories(
+                    int(form_data.get('age', 0)),
+                    form_data.get('gender', ''),
+                    float(form_data.get('weight', 0)),
+                    float(form_data.get('height', 0)),
+                    form_data.get('exercise_level', ''),
+                    form_data.get('goal', '')
+                ),
+                int(form_data.get('age', 0)),
+                form_data.get('gender', ''),
+                float(form_data.get('weight', 0)),
+                float(form_data.get('height', 0)),
+                calculate_bmi(float(form_data.get('weight', 0)), float(form_data.get('height', 0))),
+                form_data.get('exercise_level', '')
+            )
+            return render(request, 'fitnessapp/diet.html', {
+                'show_results': True,
+                'diet_plan': diet_plan,
+                'bmi': calculate_bmi(float(form_data.get('weight', 0)), float(form_data.get('height', 0))),
+                'maintenance_calories': calculate_maintenance_calories(
+                    int(form_data.get('age', 0)),
+                    form_data.get('gender', ''),
+                    float(form_data.get('weight', 0)),
+                    float(form_data.get('height', 0)),
+                    form_data.get('exercise_level', ''),
+                    form_data.get('goal', '')
+                )
+            })
+        except:
+            # Payment failed, redirect to payment page with error message
+            amount = 1000  # Amount in paise (10 INR)
+            order = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
+            return render(request, 'fitnessapp/payment.html', {'order': order, 'payment_failed': True})
+    else:
+        # Create Razorpay order
+        amount = 1000  # Amount in paise (10 INR)
+        order = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
+        return render(request, 'fitnessapp/payment.html', {'order': order})
 
 
 
