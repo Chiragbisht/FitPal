@@ -234,6 +234,7 @@ def diet_tracker(request):
         return redirect('get_diet')
     return render(request, 'fitnessapp/diet.html')
 
+
 @login_required
 def get_diet(request):
     if request.method == 'POST':
@@ -267,7 +268,7 @@ def get_diet(request):
                 calculate_bmi(float(form_data.get('weight', 0)), float(form_data.get('height', 0))),
                 form_data.get('exercise_level', '')
             )
-            return render(request, 'fitnessapp/diet.html', {
+            context = {
                 'show_results': True,
                 'diet_plan': diet_plan,
                 'bmi': calculate_bmi(float(form_data.get('weight', 0)), float(form_data.get('height', 0))),
@@ -279,18 +280,16 @@ def get_diet(request):
                     form_data.get('exercise_level', ''),
                     form_data.get('goal', '')
                 )
-            })
+            }
+            return render(request, 'fitnessapp/diet.html', context)
         except:
-            # Payment failed, redirect to payment page with error message
-            amount = 1000  # Amount in paise (10 INR)
-            order = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
-            return render(request, 'fitnessapp/payment.html', {'order': order, 'payment_failed': True})
+            # Payment failed, redirect to payment failed page
+            return redirect('payment_failed')
     else:
         # Create Razorpay order
         amount = 1000  # Amount in paise (10 INR)
         order = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
         return render(request, 'fitnessapp/payment.html', {'order': order})
-
 
 
 

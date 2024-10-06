@@ -6,12 +6,6 @@
     <h1 class="text-black text-3xl font-bold text-center mb-8">Complete Payment</h1>
     <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div class="p-6">
-            {% if payment_failed %}
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                    <strong class="font-bold">Payment Failed!</strong>
-                    <span class="block sm:inline">Please try again.</span>
-                </div>
-            {% endif %}
             <h2 class="text-2xl text-black font-semibold mb-4">Pay ₹10 </h2>
             <button id="rzp-button1" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">Pay Now</button>
         </div>
@@ -21,7 +15,7 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var options = {
-    "key": "{{ order.key }}",
+    "key": "{{ order.key }}",  // Make sure this is correctly set in your view
     "amount": "{{ order.amount }}",
     "currency": "INR",
     "name": "Fit Pal",
