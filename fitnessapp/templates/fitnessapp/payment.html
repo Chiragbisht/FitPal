@@ -40,7 +40,7 @@ var options = {
 var rzp1 = new Razorpay(options);
 rzp1.on('payment.failed', function (response){
     console.error("Payment failed:", response.error);
-    document.getElementById('razorpay-form').submit();
+    window.location.href = "{% url 'payment_failed' %}";
 });
 document.getElementById('rzp-button1').onclick = function(e){
     rzp1.open();
