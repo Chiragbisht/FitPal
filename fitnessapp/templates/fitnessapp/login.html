@@ -48,5 +48,26 @@
 </div>
 {% endblock %}
 
+
 {% block footer %}
+    <footer class="bg-gray-100 text-gray-600 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center mb-4">
+                <nav class="flex flex-wrap justify-center">
+                    <a href="{% url 'aboutus' %}" class="text-sm mx-2 hover:text-gray-900">AboutUs</a>
+                    <a href="{% url 'contact' %}" class="text-sm mx-2 hover:text-gray-900">Contact Us</a>
+                    <a href="{% url 'pricing' %}" class="text-sm mx-2 hover:text-gray-900">Pricing</a>
+                    <a href="{% url 'privacy' %}" class="text-sm mx-2 hover:text-gray-900">PrivacyPolicy</a>
+                    <a href="{% url 'termsandconditions' %}" class="text-sm mx-2 hover:text-gray-900">Termsandconditions</a>
+                    <a href="{% url 'cancelandrefund' %}" class="text-sm mx-2 hover:text-gray-900">Refunds policy</a>
+                </nav>
+            </div>
+            <div class="flex justify-center items-center">
+                <p class="text-sm">&copy; {% now "Y" %} Chirag Bisht. All rights reserved.</p>
+                
+                </a>
+            </div>
+        </div>
+    </footer>
+    
 {% endblock %}
