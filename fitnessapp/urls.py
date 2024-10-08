@@ -17,7 +17,7 @@ urlpatterns = [
 
     path('diet/', views.diet_tracker, name='diet_tracker'),
     
-
+    path('get_diet/', views.process_diet_request, name='get_diet'),
 
  
 
@@ -29,8 +29,6 @@ urlpatterns = [
     path('termsandconditions/', views.termsandconditions, name='termsandconditions'),
     path('cancelandrefund/', views.cancelandrefund, name='cancelandrefund'),
 
-    path('get_diet/', views.get_diet, name='get_diet'),
 
-    path('payment-failed/', views.payment_failed, name='payment_failed'),
    
 ]

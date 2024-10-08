@@ -7,45 +7,11 @@
     <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div class="p-6">
             <h2 class="text-2xl text-black font-semibold mb-4">Pay ₹10 </h2>
-            <button id="rzp-button1" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">Pay Now</button>
+            <form action="{% url 'get_diet' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">Pay Now</button>
+            </form>
         </div>
     </div>
 </div>
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-var options = {
-    "key": "{{ order.key }}",  // Make sure this is correctly set in your view
-    "amount": "{{ order.amount }}",
-    "currency": "INR",
-    "name": "Fit Pal",
-    "description": "Personalized Diet Plan",
-    "order_id": "{{ order.id }}",
-    "handler": function (response){
-        document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
-        document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
-        document.getElementById('razorpay_signature').value = response.razorpay_signature;
-        document.getElementById('razorpay-form').submit();
-    },
-    "theme": {
-        "color": "#3399cc"
-    }
-};
-var rzp1 = new Razorpay(options);
-rzp1.on('payment.failed', function (response){
-    console.error("Payment failed:", response.error);
-    window.location.href = "{% url 'payment_failed' %}";
-});
-document.getElementById('rzp-button1').onclick = function(e){
-    rzp1.open();
-    e.preventDefault();
-}
-</script>
-
-<form action="{% url 'get_diet' %}" method="POST" id="razorpay-form" style="display: none;">
-    {% csrf_token %}
-    <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
-    <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
-    <input type="hidden" name="razorpay_signature" id="razorpay_signature">
-</form>
 {% endblock %}
