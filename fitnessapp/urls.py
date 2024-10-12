@@ -29,6 +29,6 @@ urlpatterns = [
     path('termsandconditions/', views.termsandconditions, name='termsandconditions'),
     path('cancelandrefund/', views.cancelandrefund, name='cancelandrefund'),
 
-
+    path('quiz/', views.fitness_quiz, name='fitness_quiz'),
    
 ]

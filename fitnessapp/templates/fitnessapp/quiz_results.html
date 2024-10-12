@@ -1,0 +1,9 @@
+{% extends 'fitnessapp/base.html' %}
+{% block content %}
+<div class="container text-black mx-auto mt-10 px-4">
+    <h1 class="text-3xl font-bold mb-6">Quiz Results</h1>
+    <p class="text-xl mb-4">Your score: {{ score }} out of 10</p>
+    <p class="text-2xl font-semibold">Your fitness level: {{ category }}</p>
+    <a href="{% url 'fitness_quiz' %}" class="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Take Quiz Again</a>
+</div>
+{% endblock %}

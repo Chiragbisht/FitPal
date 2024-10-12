@@ -11,7 +11,15 @@ import requests
 from django.conf import settings
 import google.generativeai as genai
 
+from groq import Groq
+from django.conf import settings
 
+# Configure Groq client
+groq_client = Groq(api_key=settings.GROQ_API_KEY)
+
+import random
+from django.http import JsonResponse
+import json
 
 
 
@@ -276,3 +284,77 @@ def process_diet_request(request):
     else:
         # If it's a GET request, just show the payment page without Razorpay
         return render(request, 'fitnessapp/payment.html')
+    
+
+
+import json
+
+
+def generate_quiz_questions():
+    try:
+        chat_completion = groq_client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": "You are a fitness expert creating a beginner-friendly quiz."},
+                {"role": "user", "content": """Generate 10 easy, beginner-level fitness-related multiple-choice questions with 4 options each. 
+                The questions should cover basic fitness concepts, simple exercises, and general health knowledge.
+                Make sure the questions are straightforward and the answers are clear.
+                Format the response as a JSON array with the following structure for each question:
+                {
+                    "question": "The question text",
+                    "options": ["Option A", "Option B", "Option C", "Option D"],
+                    "correct_answer": 0  // Index of the correct answer (0-3)
+                }
+                """}
+            ],
+            model="mixtral-8x7b-32768",
+            max_tokens=1000,
+            temperature=0.7,
+        )
+
+        content = chat_completion.choices[0].message.content
+        questions = json.loads(content)
+        return questions
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return []
+
+def fitness_quiz(request):
+    if request.method == 'POST':
+        # Handle quiz submission
+        answers = request.POST
+        questions = request.session.get('quiz_questions', [])
+        score = calculate_score(answers, questions)
+        category = categorize_score(score)
+        return render(request, 'fitnessapp/quiz_results.html', {'score': score, 'category': category})
+    else:
+        # Generate quiz questions
+        questions = generate_quiz_questions()
+        if not questions:
+            return render(request, 'fitnessapp/quiz_error.html', {'error_message': 'Failed to generate quiz questions. Please try again later.'})
+        
+        # Store questions in session for later use
+        request.session['quiz_questions'] = questions
+        
+        return render(request, 'fitnessapp/quiz.html', {'questions': questions})
+
+def calculate_score(answers, questions):
+    score = 0
+    for i, question in enumerate(questions, start=1):
+        user_answer = answers.get(f'q{i}')
+        if user_answer and int(user_answer) - 1 == question['correct_answer']:
+            score += 1
+    return score
+
+
+
+
+def categorize_score(score):
+    if score <= 3:
+        return 'Beginner'
+    elif score <= 6:
+        return 'Intermediate'
+    elif score <= 8:
+        return 'Pro'
+    else:
+        return 'Elite'

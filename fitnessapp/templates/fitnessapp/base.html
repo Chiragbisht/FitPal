@@ -9,68 +9,139 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon"  href="{% static 'images/favicon.png' %}">
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&display=swap" rel="stylesheet">
+ 
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
     <style>
-        body {
-            background-color: #ffffffec;
-            color: #ffffff;
-        }
-        .card {
-            background-color: #232325;
-            border-color: #27272a;
-        }
-        .btn-primary {
-            background-color: #3f3f46;
-            border-color: #3f3f46;
-        }
-        .btn-primary:hover {
-            background-color: #52525b;
-            border-color: #52525b;
-        }
-        .btn-secondary {
-            background-color: #27272a;
-            border-color: #27272a;
-        }
-        .btn-secondary:hover {
-            background-color: #3f3f46;
-            border-color: #3f3f46;
-        }
-        input, select, textarea {
-            background-color: #27272a;
-            border-color: #3f3f46;
-            color: #ffffff;
-        }
-        .btn, input, select, textarea {
-            border-radius: 0.5rem;
-        }
+    body {
+        background-color: #000000; /* Solid white background */
+        color: #ffffff; /* Change text color to black for readability */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+
+    .card{
+        background-color: #2e2d2db2;
+    }
+
+
+    input, select, textarea {
+        background-color: #27272a;
+        border-color: #3f3f46;
+        color: #ffffff;
+    }
+
+    .btn, input, select, textarea {
+        border-radius: 0.1rem;
+    }
+
+    footer {
+        background-color: #ffffff; /* Set footer background to white */
+        color: #000000; /* Change text color to black for readability */
+        font-family: inherit;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+    .get-diet-btn {
+        display: inline-block;
+        background-color: #ffffff;
+        color: #000000;
+        font-weight: bold;
+        font-size: 1.25rem;
+        padding: 1rem 2rem;
+        clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        transition: all 0.3s ease;
+        margin-top: 20px;
+    }
+
+    .get-diet-btn:hover {
+        background-color: #f3f4f6;
+        transform: scale(1.05);
+    }
+
+    .content-wrapper {
+        flex-grow: 1; /* Makes the content area take up the remaining space */
+    }
+
+    .main-nav a {
+        font-weight: bold;
+        font-family: 'Archivo Black', sans-serif;
+        letter-spacing: 0px;
+    }
+    .btn-primary {
+        background-color: #3f3f46;
+        border-color: #3f3f46;
+    }
+    .btn-primary:hover {
+        background-color: #52525b;
+        border-color: #52525b;
+    }
+    .btn-secondary {
+        background-color: #27272a;
+        border-color: #27272a;
+    }
+    .btn-secondary:hover {
+        background-color: #3f3f46;
+        border-color: #3f3f46;
+    }
+
+    .btn, input, select, textarea {
+        border-radius: 0.5rem;
+    }
+
+
+
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
-    <div class="flex-grow">
-        {% block content %}
-        {% endblock %}
-    </div>
-
-    {% block footer %}
-    <footer class="bg-gray-100 text-gray-600 py-4">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-center mb-4">
-                <nav class="flex flex-wrap justify-center">
-                    <a href="{% url 'aboutus' %}" class="text-sm mx-2 hover:text-gray-900">AboutUs</a>
-                    <a href="{% url 'contact' %}" class="text-sm mx-2 hover:text-gray-900">ContactUs</a>
-                    <a href="{% url 'pricing' %}" class="text-sm mx-2 hover:text-gray-900">Pricing</a>
-                    <a href="{% url 'privacy' %}" class="text-sm mx-2 hover:text-gray-900">PrivacyPolicy</a>
-                    <a href="{% url 'termsandconditions' %}" class="text-sm mx-2 hover:text-gray-900">Termsandconditions</a>
-                    <a href="{% url 'cancelandrefund' %}" class="text-sm mx-2 hover:text-gray-900">CancelandRefunds</a>
-                </nav>
-            </div>
-            <div class="flex justify-center items-center">
-                <p class="text-sm">&copy; {% now "Y" %} Chirag Bisht. All rights reserved.</p>
-
-            </div>
+<body class=" text-white">
+{% block nav %}
+<nav class="bg-black p-4 main-nav">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="{% url 'dashboard' %}" class="text-white font-bold text-xl">
+            <img src="{% static 'images/logo.svg' %}" alt="Fit Pal" class="h-8">
+        </a>
+        <div class="flex items-center space-x-6">
+            <a href="{% url 'diet_tracker' %}" class="text-white hover:bg-white hover:text-black px-3 py-2 rounded transition duration-300">DIET</a>
+            <a href="{% url 'fitness_quiz' %}" class="text-white hover:bg-white hover:text-black px-3 py-2 rounded transition duration-300">QUIZ</a>
+            <a href="#" class="text-white hover:bg-white hover:text-black px-3 py-2 rounded transition duration-300">WORKOUT</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="bg-white text-black font-bold py-2 px-4 rounded hover:bg-gray-200 transition duration-300">LOGOUT</a>
+            {% endif %}
         </div>
-    </footer>
+    </div>
+</nav>
+{% endblock %}
+
+<div class="content-wrapper">
+    {% block content %}
+    <!-- Your content here -->
     {% endblock %}
+</div>
+
+{% block footer %}
+<footer class="bg-gray-100 text-gray-600 py-4">
+
+    <div class="container mx-auto px-4">
+        <div class="flex justify-center mb-4">
+            <nav class="flex flex-wrap justify-center">
+                <a href="{% url 'aboutus' %}" class="text-sm mx-2 hover:text-gray-300">About Us</a>
+                <a href="{% url 'contact' %}" class="text-sm mx-2 hover:text-gray-300">Contact Us</a>
+                <a href="{% url 'pricing' %}" class="text-sm mx-2 hover:text-gray-300">Pricing</a>
+                <a href="{% url 'privacy' %}" class="text-sm mx-2 hover:text-gray-300">Privacy Policy</a>
+                <a href="{% url 'termsandconditions' %}" class="text-sm mx-2 hover:text-gray-300">Terms and Conditions</a>
+                <a href="{% url 'cancelandrefund' %}" class="text-sm mx-2 hover:text-gray-300">Refunds Policy</a>
+            </nav>
+        </div>
+        <div class="flex justify-center items-center">
+            <p class="text-sm">&copy; {% now "Y" %} Chirag Bisht. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+{% endblock %}
 
 </body>
 </html>

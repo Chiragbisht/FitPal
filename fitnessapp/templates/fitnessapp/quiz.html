@@ -1,0 +1,31 @@
+{% extends 'fitnessapp/base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<div class="container  text-white mx-auto mt-10 px-4">
+    <h1 class="text-3xl font-bold mb-6">Fitness Quiz</h1>
+    {% if questions %}
+        <form method="post">
+            {% csrf_token %}
+            {% for question in questions %}
+                <div class="mb-6">
+                    <p class="font-semibold mb-2">{{ forloop.counter }}. {{ question.question }}</p>
+                    {% for option in question.options %}
+                        <div class="mb-2">
+                            <input type="radio" name="q{{ forloop.parentloop.counter }}" value="{{ forloop.counter }}" id="q{{ forloop.parentloop.counter }}o{{ forloop.counter }}" required>
+                            <label for="q{{ forloop.parentloop.counter }}o{{ forloop.counter }}">{{ option }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="flex justify-between items-center">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Submit Quiz</button>
+                <a href="{% url 'dashboard' %}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">I Quit</a>
+            </div>
+        </form>
+
+    {% endif %}
+</div>
+{% endblock %}

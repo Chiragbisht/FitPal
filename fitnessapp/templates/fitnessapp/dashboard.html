@@ -1,63 +1,22 @@
 {% extends 'fitnessapp/base.html' %}
 {% load static %}
 {% block content %}
-<!-- Navigation Bar -->
-<nav class="bg-zinc-800 p-4">
-    <div class="container mx-auto flex justify-between items-center">
-        <div class="flex items-center space-x-4">
-            <a href="{% url 'dashboard' %}" class="text-white font-bold text-xl">
-                <img src="{% static 'images/logo.svg' %}" alt="Fit Pal" class="h-12">
-            </a>
-            <a href="#" class="text-black hover:text-gray-300">Workout</a>
-            <a href="#" class="text-black hover:text-gray-300">Diet</a>
-            <a href="#" class="text-black hover:text-gray-300">Sleep</a>
-        </div>
-        <div class="flex items-center">
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">Logout</a>
-            {% else %}
-                <a href="{% url 'login_or_register' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">Login / Register</a>
-            {% endif %}
-        </div>
-    </div>
-</nav>
-
 <!-- Content -->
-<div class="container mx-auto mt-10 px-4">
-    <h1 class="text-black text-3xl font-bold text-center mb-8">Welcome to Fit Pal</h1>
-    
-    {% if user.is_authenticated %}
-        <!-- <h2 class="text-2xl mb-6">Hello, {{ user.username }}!</h2> -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- <div class="card bg-white shadow-lg rounded-lg overflow-hidden">
-                <div class="card-body p-6">
-                    <h5 class="card-title text-xl font-semibold mb-2">Workout Tracker</h5>
-                    <p class="card-text mb-4">Log and track your workouts.</p>
-                    <a href="#" class="btn btn-primary block text-center rounded-lg py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold transition duration-300 ease-in-out">Go to Tracker</a>
-                </div>
-            </div> -->
-            <div class="card bg-white shadow-lg rounded-lg overflow-hidden">
-                <div class="card-body p-6">
-                    <h5 class="card-title text-xl font-semibold mb-2">Diet (check this) </h5>
-                    <p class="card-text mb-4">Get personalied diet plan</p>
-                    <a href="{% url 'diet_tracker' %}" class="btn btn-primary block text-center rounded-lg py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold transition duration-300 ease-in-out">Get Diet</a>
-                </div>
-            </div>
-            <!-- <div class="card bg-white shadow-lg rounded-lg overflow-hidden">
-                <div class="card-body p-6">
-                    <h5 class="card-title text-xl font-semibold mb-2">Sleep</h5>
-                    <p class="card-text mb-4">Track your daily sleep.</p>
-                    <a href="#" class="btn btn-primary block text-center rounded-lg py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold transition duration-300 ease-in-out">See Progress</a>
-                </div>
-            </div> -->
-        </div>
-
-        
-    {% else %}
-    
-       
-    {% endif %}
+<div class="relative min-h-screen">
+    <!-- Background image -->
+    <div class="absolute inset-0 z-0">
+        <img src="{% static 'images/gym2.jpg' %}" alt="Gym Equipment" class="w-full h-full object-cover">
     </div>
     
-
+    <!-- Content overlay -->
+    <div class="relative z-10 container mx-auto px-4 py-8 flex flex-col items-center justify-center h-full">
+        <h1 class="text-white text-4xl font-bold text-center mb-12 shadow-text">Welcome to Fit Pal</h1>
+        
+        {% if user.is_authenticated %}
+            <a href="{% url 'diet_tracker' %}" class="get-diet-btn">
+                GET DIET
+            </a>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
