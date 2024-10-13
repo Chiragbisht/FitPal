@@ -170,24 +170,24 @@ def generate_diet_plan(diet_type, maintenance_calories, age, gender, weight, hei
     - Activity level: {exercise_level}
     - Daily calorie intake: {maintenance_calories} calories
 
-    dont use astrix(*) anywhere in the answer
+    
 
     Please provide a diet plan with 4 meals a day (breakfast, lunch, snack, and dinner) that meets the total daily calorie requirement of {maintenance_calories} calories. Include specific Indian dishes and portion sizes.
 
     Format the output as follows:
     Indian {diet_type} Diet Plan for a {age}-Year-Old {gender}
     Breakfast:
-    • Item 1 (calories)
-    • Item 2 (calories)
+    • Item 1 (calories) with quantity in grams or ml
+    • Item 2 (calories) with quantity in grams or ml
     Lunch:
-    • Item 1 (calories)
-    • Item 2 (calories)
+    • Item 1 (calories) with quantity in grams or ml
+    • Item 2 (calories) with quantity in grams or ml
     Snack:
-    • Item 1 (calories)
-    • Item 2 (calories)
+    • Item 1 (calories) with quantity in grams or ml
+    • Item 2 (calories) with quantity in grams or ml
     Dinner:
-    • Item 1 (calories)
-    • Item 2 (calories)
+    • Item 1 (calories) with quantity in grams or ml
+    • Item 2 (calories) with quantity in grams or ml
     
     IMP:
 
@@ -197,7 +197,7 @@ def generate_diet_plan(diet_type, maintenance_calories, age, gender, weight, hei
     • Point 4
     • Point 5
 
-    Use round bullet points (•) and make headings bold..dont use astrix."""
+    Use round bullet points (•) and make headings bold. """
 
     model = genai.GenerativeModel('gemini-pro')
     response = model.generate_content(prompt)

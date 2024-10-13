@@ -2,43 +2,42 @@
 {% load static %}
 {% block content %}
 <!-- Content -->
-<div class="container mx-auto mt-10 px-4 bg-black text-white min-h-screen">
-    <h1 class="text-white text-3xl font-bold text-center mb-8">Diet Tracker</h1>
+<div class="container mx-auto mt-10 px-4 bg-black text-gray-100 min-h-screen">
+    <br>
     
     <div class="flex flex-wrap -mx-4">
         <!-- Left column: Input form -->
-        <div class="w-full  md:w-1/2 px-4 mb-8">
-            <div class="bg-gray-800 shadow-lg rounded-lg overflow-hidden">
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold mb-4">Personal Information</h2>
-                    <form action="{% url 'diet_tracker' %}" method="post" class="space-y-4">
+        <div class="w-full md:w-1/2 px-4 mb-8">
+            <div class="bg-darker-blue rounded-3xl shadow-2xl overflow-hidden border border-gray-800">
+                <div class="p-8">
+                    <form action="{% url 'diet_tracker' %}" method="post" class="space-y-6">
                         {% csrf_token %}
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <label for="age" class="block text-sm font-medium text-gray-300">Age</label>
-                                <input type="number" id="age" name="age" required class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-700 text-white">
+                                <label for="age" class="block text-sm font-medium text-gray-300 mb-1">Age</label>
+                                <input type="number" id="age" name="age" required class="w-full px-4 py-2 rounded-lg bg-dark-blue border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
                             </div>
                             <div>
-                                <label for="gender" class="block text-sm font-medium text-gray-300">Gender</label>
-                                <select id="gender" name="gender" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-700 text-white">
+                                <label for="gender" class="block text-sm font-medium text-gray-300 mb-1">Gender</label>
+                                <select id="gender" name="gender" class="w-full px-4 py-2 rounded-lg bg-dark-blue border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <label for="weight" class="block text-sm font-medium text-gray-300">Weight (kg)</label>
-                                <input type="number" id="weight" name="weight" required class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-700 text-white">
+                                <label for="weight" class="block text-sm font-medium text-gray-300 mb-1">Weight (kg)</label>
+                                <input type="number" id="weight" name="weight" required class="w-full px-4 py-2 rounded-lg bg-dark-blue border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
                             </div>
                             <div>
-                                <label for="height" class="block text-sm font-medium text-gray-300">Height (cm)</label>
-                                <input type="number" id="height" name="height" required class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-700 text-white">
+                                <label for="height" class="block text-sm font-medium text-gray-300 mb-1">Height (cm)</label>
+                                <input type="number" id="height" name="height" required class="w-full px-4 py-2 rounded-lg bg-dark-blue border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
                             </div>
                         </div>
                         <div>
-                            <label for="exercise_level" class="block text-sm font-medium text-gray-300">Exercise Level</label>
-                            <select id="exercise_level" name="exercise_level" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-700 text-white">
+                            <label for="exercise_level" class="block text-sm font-medium text-gray-300 mb-1">Exercise Level</label>
+                            <select id="exercise_level" name="exercise_level" class="w-full px-4 py-2 rounded-lg bg-dark-blue border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
                                 <option value="sedentary">No exercise (lazy mf)</option>
                                 <option value="lightly_active">Lightly active (1-3 days/week)</option>
                                 <option value="moderately_active">Moderately active (3-5 days/week)</option>
@@ -47,24 +46,27 @@
                             </select>
                         </div>
                         <div>
-                            <label for="goal" class="block text-sm font-medium text-gray-300">Goal</label>
-                            <select id="goal" name="goal" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-700 text-white">
+                            <label for="goal" class="block text-sm font-medium text-gray-300 mb-1">Goal</label>
+                            <select id="goal" name="goal" class="w-full px-4 py-2 rounded-lg bg-dark-blue border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
                                 <option value="build_muscle">Build Muscle</option>
                                 <option value="weight_loss">Weight Loss</option>
                                 <option value="maintain">Maintain Weight</option>
                             </select>
                         </div>
                         <div>
-                            <label for="diet_type" class="block text-sm font-medium text-gray-300">Diet Type</label>
-                            <select id="diet_type" name="diet_type" class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-700 text-white">
+                            <label for="diet_type" class="block text-sm font-medium text-gray-300 mb-1">Diet Type</label>
+                            <select id="diet_type" name="diet_type" class="w-full px-4 py-2 rounded-lg bg-dark-blue border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
                                 <option value="vegetarian">Vegetarian</option>
                                 <option value="non_vegetarian">Non-Vegetarian</option>
                                 <option value="eggetarian">Eggetarian</option>
                             </select>
                         </div>
                         <div id="error-message" class="text-red-500 text-sm hidden">Please enter values for age, weight, and height.</div>
-                        <div class="mt-6">
-                            <button type="submit" class="w-full bg-white text-black font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out hover:bg-gray-200">GET DIET</button>
+                        <div class="mt-8">
+                            <button type="submit" class="bg-gradient-to-r from-blue-600 to-teal-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out hover:from-blue-700 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transform hover:scale-105 mx-auto block">
+
+                                GET DIET
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -74,21 +76,32 @@
         <!-- Right column: Diet plan results -->
         <div class="w-full md:w-1/2 px-4">
             {% if show_results %}
-            <div class="bg-gray-800 text-white rounded-lg overflow-hidden">
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold mb-4">Your Personalized Diet Plan</h2>
-                    <p class="mb-2"><strong>BMI:</strong> {{ bmi }}</p>
-                    <p class="mb-4"><strong>Maintenance Calories:</strong> {{ maintenance_calories }}</p>
-                    <div class="bg-gray-700 p-4 rounded whitespace-pre-wrap">
-                        {{ diet_plan|safe|linebreaks }}
+            <div class="bg-darker-blue rounded-3xl shadow-2xl overflow-hidden border border-gray-800">
+                <div class="p-8">
+                    <h2 class="text-3xl font-semibold mb-6 text-gray-100">Your Personalized Diet Plan</h2>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center bg-dark-blue rounded-lg p-4">
+                            <span class="font-medium text-gray-300">BMI:</span>
+                            <span class="text-xl font-bold text-blue-400">{{ bmi }}</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-dark-blue rounded-lg p-4">
+                            <span class="font-medium text-gray-300">Maintenance Calories:</span>
+                            <span class="text-xl font-bold text-teal-400">{{ maintenance_calories }}</span>
+                        </div>
+                        <div class="bg-dark-blue rounded-lg p-6 mt-4">
+                            <h4 class="font-semibold mb-2 text-gray-200">Recommended Diet Plan:</h4>
+                            <div class="text-sm leading-relaxed text-gray-300 whitespace-pre-wrap">
+                                {{ diet_plan|safe|linebreaks }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             {% else %}
-            <div class="bg-gray-800 text-white rounded-lg overflow-hidden">
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold mb-4">Your Personalized Diet Plan</h2>
-                    <p>Fill out the data and click "GET DIET" to see your personalized diet plan here.</p>
+            <div class="bg-darker-blue rounded-3xl shadow-2xl overflow-hidden border border-gray-800">
+                <div class="p-8">
+                    <h2 class="text-3xl font-semibold mb-6 text-gray-100">Your Personalized Diet Plan</h2>
+                    <p class="text-gray-300">Fill out the data and click "GET DIET" to see your personalized diet plan here.</p>
                 </div>
             </div>
             {% endif %}
@@ -96,5 +109,11 @@
     </div>
 </div>
 
+<style>
+
+    .bg-dark-blue {
+        background-color: #0A1118;
+    }
+</style>
 
 {% endblock %}
