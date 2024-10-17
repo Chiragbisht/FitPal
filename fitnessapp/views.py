@@ -22,7 +22,7 @@ from django.http import JsonResponse
 import json
 
 
-
+from .models import ChatMessage
 
 @login_required
 def get_diet(request):
@@ -358,3 +358,23 @@ def categorize_score(score):
         return 'Pro'
     else:
         return 'Elite'
+    
+
+
+
+@login_required
+def chat_room(request):
+    messages = ChatMessage.objects.all()
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            ChatMessage.objects.create(user=request.user, content=content)
+        return redirect('chat_room')
+    return render(request, 'fitnessapp/chat_room.html', {'messages': messages})
+
+@login_required
+def delete_message(request, message_id):
+    message = ChatMessage.objects.get(id=message_id)
+    if request.user == message.user:
+        message.delete()
+    return redirect('chat_room')

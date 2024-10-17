@@ -1,0 +1,57 @@
+{% extends 'fitnessapp/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mx-auto px-4 py-8 text-white">
+    <h1 class="text-3xl font-bold mb-6 text-center">Community Chat</h1>
+    <div class="flex flex-col md:flex-row gap-6">
+        <div class="w-full md:w-2/3 bg-black rounded-lg shadow-lg p-6">
+            <div id="chat-messages" class="h-96 overflow-y-auto mb-4">
+                {% for message in messages %}
+                    <div class="mb-3 p-2 {% if user == message.user %}bg-blue-900{% else %}bg-gray-700{% endif %} rounded-lg">
+                        <span class="font-bold text-blue-300">{{ message.user.username }}:</span>
+                        <p class="mt-1">{{ message.content }}</p>
+                        {% if user == message.user %}
+                            <a href="{% url 'delete_message' message.id %}" class="text-red-400 text-sm mt-1 inline-block">Delete</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <form method="post" class="mt-4">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <textarea name="content" class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg p-3 focus:outline-none focus:border-blue-500" rows="3" placeholder="Type your message..."></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline">
+                        Send
+                    </button>
+                </div>
+            </form>
+        </div>
+    
+    </div>
+</div>
+
+<script>
+function refreshChat() {
+    fetch('{% url "chat_room" %}')
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newMessages = doc.getElementById('chat-messages');
+            document.getElementById('chat-messages').innerHTML = newMessages.innerHTML;
+        });
+}
+
+setInterval(refreshChat, 2000); // Refresh every 2 seconds
+
+// Scroll to bottom of chat on load and after refresh
+function scrollToBottom() {
+    const chatMessages = document.getElementById('chat-messages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+
+</script>
+{% endblock %}

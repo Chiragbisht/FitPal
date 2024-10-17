@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 
 from dotenv import load_dotenv
+import environ
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,6 +39,7 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 GROQ_API_KEY='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'
 
 
+GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -80,8 +84,15 @@ INSTALLED_APPS = [
 
     'corsheaders',
 
+    
+
 
 ]
+
+
+
+
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 

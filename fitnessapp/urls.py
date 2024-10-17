@@ -30,5 +30,7 @@ urlpatterns = [
     path('cancelandrefund/', views.cancelandrefund, name='cancelandrefund'),
 
     path('quiz/', views.fitness_quiz, name='fitness_quiz'),
-   
+
+    path('chat/', views.chat_room, name='chat_room'),
+    path('delete-message/<int:message_id>/', views.delete_message, name='delete_message'),
 ]

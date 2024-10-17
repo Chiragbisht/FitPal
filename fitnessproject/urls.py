@@ -28,6 +28,9 @@ urlpatterns = [
     
     path('', include('fitnessapp.urls')),
     path('accounts/', include('allauth.urls')),
+
+
+
     
 ]
 
